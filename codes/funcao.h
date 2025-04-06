@@ -7,7 +7,6 @@ typedef struct
     float saldo_bit;
     float saldo_eth;
     float saldo_rip;
-    int qtde;
 } cotacao;
 
 void consultar_saldo(cotacao *);
@@ -15,3 +14,7 @@ void consultar_saldo(cotacao *);
 int menu();
 
 void deposito(cotacao *);
+
+int cripto();
+
+void comprar_criptomoedas(cotacao *);

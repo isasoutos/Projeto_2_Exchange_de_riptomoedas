@@ -18,3 +18,5 @@ void deposito(cotacao *);
 int cripto();
 
 void comprar_criptomoedas(cotacao *);
+
+void atualizar_cotacao(cotacao *);

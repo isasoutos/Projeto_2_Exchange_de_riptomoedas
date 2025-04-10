@@ -5,6 +5,7 @@
 
 int main(){
     cotacao *lista = malloc(sizeof(cotacao));
+    usuario user = {"42246165806", "1234"};  // CPF e senha fixos
     int opcao;
 
     lista->bitcoin = 83233.10; //Valor do dia 04/04/2025 as 13:15
@@ -26,6 +27,12 @@ int main(){
             comprar_criptomoedas(lista);
         }else if(opcao == 6){
             atualizar_cotacao(lista);
+        }
+        else if(opcao == 3){
+            if (login(&user)) {
+                printf("Acesso liberado!\n");
+            }
+        
         }
     } while (opcao != 8);
 

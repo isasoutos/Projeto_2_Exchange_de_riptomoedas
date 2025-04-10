@@ -3,12 +3,33 @@
 #include "funcao.h"
 #include <stdlib.h>
 
+int login(usuario *user) {
+    char cpf_input[TAM_CPF + 1];
+    char senha_input[TAM_SENHA + 1];
+
+    printf("CPF (somente números): ");
+    scanf(" %11s", cpf_input);
+
+    printf("Senha (4 caracteres): ");
+    scanf(" %4s", senha_input);
+
+    if (strcmp(user->CPF, cpf_input) == 0 &&
+        strcmp(user->senha, senha_input) == 0) {
+        printf("\nLogin realizado!\n");
+        return 1;
+    }
+
+    printf("\nCPF ou senha inválidos.\n");
+    return 0;
+}
+
 int menu() {
     int opcao;
 
     printf("----------------------------------------------------------\n");
     printf("1- Consultar saldo\n");
     printf("2- Depósito\n");
+    printf("3- Login\n");
     printf("4- Comprar Criptomoedas\n");
     printf("6- Atualizar cotação\n");
     printf("8- Sair\n");

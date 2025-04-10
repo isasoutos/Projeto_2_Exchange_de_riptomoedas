@@ -1,5 +1,13 @@
-typedef struct 
-{
+#define TAM_CPF 11
+#define TAM_SENHA 4
+
+typedef struct { // Struct do usuário
+    char CPF[TAM_CPF + 1];    // +1 para o '\0'
+    char senha[TAM_SENHA + 1];
+} usuario;
+
+
+typedef struct { // Struct para valores da carteira e cotações
     float bitcoin;
     float ethereum;
     float ripple;
@@ -9,7 +17,10 @@ typedef struct
     float saldo_rip;
 } cotacao;
 
+
 void consultar_saldo(cotacao *);
+
+int login(usuario *user);
 
 int menu();
 

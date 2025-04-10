@@ -20,11 +20,11 @@ int main(){
         opcao = menu();
 
         if(opcao == 1){
-            consultar_saldo(lista);
+            consultar_saldo(lista, &user);
         }else if(opcao == 2){
-            deposito(lista);
+            deposito(lista, &user);
         }else if(opcao == 4){
-            comprar_criptomoedas(lista);
+            comprar_criptomoedas(lista, &user);
         }else if(opcao == 6){
             atualizar_cotacao(lista);
         }else if(opcao == 7){

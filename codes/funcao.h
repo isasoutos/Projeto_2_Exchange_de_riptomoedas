@@ -18,17 +18,17 @@ typedef struct { // Struct para valores da carteira e cotações
 } cotacao;
 
 
-void consultar_saldo(cotacao *);
+void consultar_saldo(cotacao *, usuario *);
 
 int login(usuario *user);
 
 int menu();
 
-void deposito(cotacao *);
+void deposito(cotacao *, usuario *);
 
 int cripto();
 
-void comprar_criptomoedas(cotacao *);
+void comprar_criptomoedas(cotacao *, usuario *);
 
 void atualizar_cotacao(cotacao *);
 

@@ -55,7 +55,16 @@ int cripto() {
 
 }
 
-void consultar_saldo(cotacao *lista){
+void consultar_saldo(cotacao *lista, usuario *user){
+    char senha_digitada[TAM_SENHA + 1];
+
+    printf("Digite sua senha para consultar o saldo: ");
+    scanf(" %4s", senha_digitada);
+
+    if (strcmp(user->senha, senha_digitada) != 0) {
+        printf("Senha incorreta! Tente novamente.\n");
+        return;
+    }
 
     printf("Valor do saldo do Real: R$ %.2f\n", lista->saldo_reais);
     printf("Valor do saldo do Bitcoin: R$ %.4f\n", lista->saldo_bit);
@@ -63,14 +72,23 @@ void consultar_saldo(cotacao *lista){
     printf("Valor do saldo do Ripple: R$ %.2f\n", lista->saldo_rip);
 }
 
-void deposito(cotacao *lista){
+void deposito(cotacao *lista, usuario *user){
     float valor_depo;
+    char senha_digitada[TAM_SENHA + 1];
 
     printf("O valor do seu saldo: %.2f\n", lista->saldo_reais);
     printf("Digite o valor que deseja depositar: ");
     scanf("%f", &valor_depo);
+
     if (valor_depo <= 0){
         printf("Valor insuficiente!\n");
+        return;
+    }
+    printf("Digite sua senha para realizar o deposito: ");
+    scanf(" %4s", senha_digitada);
+
+    if (strcmp(user->senha, senha_digitada) != 0) {
+        printf("Senha incorreta! Deposito cancelado, tente novamente.\n");
         return;
     }
 
@@ -79,10 +97,19 @@ void deposito(cotacao *lista){
     printf("Depósito de R$ %.2f realizado.\n", valor_depo);
     printf("Novo saldo: R$ %.2f\n", lista->saldo_reais);
 }
-void comprar_criptomoedas(cotacao *lista){
+void comprar_criptomoedas(cotacao *lista, usuario *user){
+    char senha_digitada[TAM_SENHA + 1];
     float compra_bit;
     float compra_eth;
     float compra_rip;
+
+    printf("Digite sua senha para realizar a compra de Criptomoedas: ");
+    scanf(" %4s", senha_digitada);
+    
+    if (strcmp(user->senha, senha_digitada) != 0) {
+        printf("Senha incorreta! Tente novamente.\n");
+        return;
+    }
 
     printf("Valor do saldo do Real: R$ %.2f\n", lista->saldo_reais);
     printf("Valor do saldo do Bitcoin: R$ %.2f\n", lista->saldo_bit);
@@ -103,6 +130,15 @@ void comprar_criptomoedas(cotacao *lista){
         if (lista->saldo_reais >= compra_bit){
             lista->saldo_bit = ((compra_bit / lista->bitcoin) - ((compra_bit/lista->bitcoin)*2/100)) + lista->saldo_bit;
             lista->saldo_reais = lista->saldo_reais - compra_bit;
+
+            printf("Digite sua senha para confirmar sua compra: ");
+            scanf(" %4s", senha_digitada);
+
+            if (strcmp(user->senha, senha_digitada) != 0) {
+                printf("Senha incorreta! Compra cancelado, tente novamente.\n");
+                return;
+            }
+
             printf("Saldo atual: %.2f\n", lista->saldo_reais);
             printf("Saldo bitcoin: %.4f\n", lista->saldo_bit);
         }else if(lista->saldo_reais < compra_bit){
@@ -120,6 +156,15 @@ void comprar_criptomoedas(cotacao *lista){
         if (lista->saldo_reais >= compra_eth){
             lista->saldo_eth = ((compra_eth / lista->ethereum) - ((compra_eth/lista->ethereum)*1/100)) + lista->saldo_eth;
             lista->saldo_reais = lista->saldo_reais - compra_eth;
+
+            printf("Digite sua senha para confirmar sua compra: ");
+            scanf(" %4s", senha_digitada);
+
+            if (strcmp(user->senha, senha_digitada) != 0) {
+                printf("Senha incorreta! Compra cancelado, tente novamente.\n");
+                return;
+            }
+
             printf("Saldo atual: %.2f\n", lista->saldo_reais);
             printf("Saldo ethereum: %.2f\n", lista->saldo_eth);
         }else if(lista->saldo_reais < compra_eth){
@@ -137,6 +182,15 @@ void comprar_criptomoedas(cotacao *lista){
         if (lista->saldo_reais >= compra_rip){
             lista->saldo_rip = ((compra_rip / lista->ripple) - ((compra_rip/lista->ripple)*1/100)) + lista->saldo_rip;
             lista->saldo_reais = lista->saldo_reais - compra_rip;
+
+            printf("Digite sua senha para confirmar sua compra: ");
+            scanf(" %4s", senha_digitada);
+
+            if (strcmp(user->senha, senha_digitada) != 0) {
+                printf("Senha incorreta! Compra cancelado, tente novamente.\n");
+                return;
+            }
+
             printf("Saldo atual: %.2f\n", lista->saldo_reais);
             printf("Saldo ripple: %.2f\n", lista->saldo_rip);
         }else if(lista->saldo_reais < compra_rip){

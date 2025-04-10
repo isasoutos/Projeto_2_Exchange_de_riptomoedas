@@ -33,6 +33,8 @@ int main(){
             atualizar_cotacao(lista);
         }else if(opcao == 7){
             sacar(lista, &user);      
+        }else if(opcao == 5){
+            vender_criptomoedas(lista);
         }
     } while (opcao != 8);
 

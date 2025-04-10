@@ -30,6 +30,7 @@ int menu() {
     printf("1- Consultar saldo\n");
     printf("2- Depósito\n");
     printf("4- Comprar Criptomoedas\n");
+    printf("5- Vender Criptomoedas\n");
     printf("6- Atualizar cotação\n");
     printf("7- Sacar\n");
     printf("8- Sair\n");
@@ -270,3 +271,85 @@ void sacar(cotacao *carteira, usuario *user) {
     printf("✅ Saque de R$ %.2f realizado com sucesso!\n", valor);
     printf("Novo saldo: R$ %.2f\n", carteira->saldo_reais);
 }
+void vender_criptomoedas (cotacao *lista) {
+    // Taxas sugeridas na orientação: Bitcoin 3%, Ethereum 2%, Ripple 1%
+    float valor_venda;
+    int escolher = cripto();
+
+    if (escolher == 1) {
+        printf("Valor do Bitcoin: %.2f\n", lista->bitcoin);
+        printf("Saldo em Bitcoin: %.4f\n", lista->saldo_bit);
+
+        printf("Digite quanto deseja vender: ");
+        scanf("%f", &valor_venda);
+
+        if (valor_venda <= 0 || valor_venda > lista->saldo_bit) {
+            printf("Valor inválido ou saldo insuficiente.\n Tente novamente.\n");
+            return;
+        }
+
+        float valor_em_reais = valor_venda * lista->bitcoin;
+        float taxa = valor_em_reais * 0.03;
+        float liquido = valor_em_reais - taxa;
+
+        lista->saldo_bit -= valor_venda;
+        lista->saldo_reais += liquido;
+
+        printf("Venda realizada!\n");
+        printf("Taxa de 3%%: R$ %.2f\n", taxa);
+        printf("Recebido em reais: R$ %.2f\n", liquido);
+    }
+
+    else if (escolher == 2) { // Ethereum
+        printf("Valor do Ethereum: %.2f\n", lista->ethereum);
+        printf("Saldo em Ethereum: %.2f\n", lista->saldo_eth);
+
+        printf("Digite quanto de Ethereum deseja vender: ");
+        scanf("%f", &valor_venda);
+
+        if (valor_venda <= 0 || valor_venda > lista->saldo_eth) {
+            printf("Valor inválido ou saldo insuficiente.\nTente novamente.\n");
+            return;
+        }
+
+        float valor_em_reais = valor_venda * lista->ethereum;
+        float taxa = valor_em_reais * 0.02;
+        float liquido = valor_em_reais - taxa;
+
+        lista->saldo_eth -= valor_venda;
+        lista->saldo_reais += liquido;
+
+        printf("Venda realizada!\n");
+        printf("Taxa de 2%%: R$ %.2f\n", taxa);
+        printf("Recebido em reais: R$ %.2f\n", liquido);
+    }
+
+    else if (escolher == 3) { // Ripple
+        printf("Valor do Ripple: %.2f\n", lista->ripple);
+        printf("Saldo em Ripple: %.2f\n", lista->saldo_rip);
+
+        printf("Digite quanto deseja vender: ");
+        scanf("%f", &valor_venda);
+
+        if (valor_venda <= 0 || valor_venda > lista->saldo_rip) {
+            printf("Valor inválido ou saldo insuficiente.\n Tente novamente.\n");
+            return;
+        }
+
+        float valor_em_reais = valor_venda * lista->ripple;
+        float taxa = valor_em_reais * 0.01;
+        float liquido = valor_em_reais - taxa;
+
+        lista->saldo_rip -= valor_venda;
+        lista->saldo_reais += liquido;
+
+        printf("Venda realizada!\n");
+        printf("Taxa de 1%%: R$ %.2f\n", taxa);
+        printf("Recebido em reais: R$ %.2f\n", liquido);
+    }
+
+    else {
+        printf("Moeda inválida.\n");
+    }
+}
+

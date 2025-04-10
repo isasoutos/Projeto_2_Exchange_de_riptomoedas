@@ -31,3 +31,5 @@ int cripto();
 void comprar_criptomoedas(cotacao *);
 
 void atualizar_cotacao(cotacao *);
+
+void sacar(cotacao *, usuario *);

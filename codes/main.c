@@ -27,8 +27,9 @@ int main(){
             comprar_criptomoedas(lista);
         }else if(opcao == 6){
             atualizar_cotacao(lista);
-        }
-        else if(opcao == 3){
+        }else if(opcao == 7){
+            sacar(lista, &user);   
+        } else if(opcao == 3){
             if (login(&user)) {
                 printf("Acesso liberado!\n");
             }

@@ -32,6 +32,7 @@ int menu() {
     printf("3- Login\n");
     printf("4- Comprar Criptomoedas\n");
     printf("6- Atualizar cotação\n");
+    printf("7- Sacar\n");
     printf("8- Sair\n");
     printf("Digite o que deseja: ");
     scanf("%d", &opcao);
@@ -184,4 +185,35 @@ void atualizar_cotacao(cotacao *lista){
     }else {
         printf("Criptomoeda não identificada!\n");
     }
+}
+
+void sacar(cotacao *carteira, usuario *user) {
+    char senha_digitada[TAM_SENHA + 1];
+    float valor;
+
+    printf("Digite sua senha para sacar: ");
+    scanf(" %4s", senha_digitada);
+
+    if (strcmp(user->senha, senha_digitada) != 0) {
+        printf("Senha incorreta! Saque cancelado, tente novamente.\n");
+        return;
+    }
+
+    printf("Saldo atual da carteira: R$ %.2f\n", carteira->saldo_reais);
+    printf("Digite o valor que deseja sacar: R$ ");
+    scanf("%f", &valor);
+
+    if (valor <= 0) {
+        printf("Valor inválido, o valor do saque não pode ser 0!\n");
+        return;
+    }
+
+    if (valor > carteira->saldo_reais) {
+        printf("Saldo insuficiente, realize um aporte e tente novamente!\n");
+        return;
+    }
+
+    carteira->saldo_reais -= valor;
+    printf("✅ Saque de R$ %.2f realizado com sucesso!\n", valor);
+    printf("Novo saldo: R$ %.2f\n", carteira->saldo_reais);
 }

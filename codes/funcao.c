@@ -29,7 +29,6 @@ int menu() {
     printf("----------------------------------------------------------\n");
     printf("1- Consultar saldo\n");
     printf("2- Depósito\n");
-    printf("3- Login\n");
     printf("4- Comprar Criptomoedas\n");
     printf("6- Atualizar cotação\n");
     printf("7- Sacar\n");

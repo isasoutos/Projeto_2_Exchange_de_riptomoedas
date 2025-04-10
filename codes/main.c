@@ -2,11 +2,15 @@
 #include <string.h>
 #include "funcao.h"
 #include <stdlib.h>
+#include <time.h>
 
 int main(){
     cotacao *lista = malloc(sizeof(cotacao));
     usuario user = {"42246165806", "1234"};  // CPF e senha fixos
     int opcao;
+
+    setenv("TZ", "America/Sao_Paulo", 1);
+    tzset();
 
     lista->bitcoin = 83233.10; //Valor do dia 04/04/2025 as 13:15
     lista->ethereum = 1791.54; //Valor do dia 04/04/2025 as 13:17
@@ -24,7 +28,7 @@ int main(){
         opcao = menu();
 
         if(opcao == 1){
-            consultar_saldo(lista, &user);
+            consultar_saldo(lista);
         }else if(opcao == 2){
             deposito(lista, &user);
         }else if(opcao == 4){

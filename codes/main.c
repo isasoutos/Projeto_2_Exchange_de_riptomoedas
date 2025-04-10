@@ -18,6 +18,7 @@ int main(){
 
     while (!login(&user)) {
         printf("Tente novamente...\n");
+    }
 
     do{
         opcao = menu();

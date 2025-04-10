@@ -16,6 +16,9 @@ int main(){
     lista->saldo_eth = 0.0;
     lista->saldo_rip = 0.0;
 
+    while (!login(&user)) {
+        printf("Tente novamente...\n");
+
     do{
         opcao = menu();
 

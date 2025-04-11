@@ -35,6 +35,9 @@ int menu() {
     printf("6- Atualizar cotação\n");
     printf("7- Sacar\n");
     printf("8- Sair\n");
+    printf("9- Extrato\n");
+    printf("10- Extrato\n");
+
     printf("Digite o que deseja: ");
     scanf("%d", &opcao);
     printf("----------------------------------------------------------\n");
@@ -87,6 +90,8 @@ void deposito(cotacao *lista, usuario *user){
     printf("O valor do seu saldo: %.2f\n", lista->saldo_reais);
     printf("Digite o valor que deseja depositar: ");
     scanf("%f", &valor_depo);
+    lista->saldo_reais += valor_depo;
+
 
     if (valor_depo <= 0){
         printf("Valor insuficiente!\n");
@@ -367,4 +372,28 @@ void vender_criptomoedas (cotacao *lista) {
         printf("Moeda inválida.\n");
     }
 }
+void registrar_extrato(char extrato[][100], int *qtd, const char *mensagem) {
+    if (*qtd >= 100) return;
 
+    time_t agora = time(NULL);
+    struct tm *tempo = localtime(&agora);
+
+    char linha[100];
+    snprintf(linha, sizeof(linha), "[%02d/%02d %02d:%02d] %s",
+             tempo->tm_mday, tempo->tm_mon + 1, tempo->tm_hour, tempo->tm_min, mensagem);
+
+    strcpy(extrato[*qtd], linha);
+    (*qtd)++;
+}
+
+void exibir_extrato(char extrato[][100], int qtd) {
+    if (qtd == 0) {
+        printf("Nenhuma movimentação registrada.\n");
+        return;
+    }
+
+    printf("\n📄 Extrato de movimentações:\n");
+    for (int i = 0; i < qtd; i++) {
+        printf("%s\n", extrato[i]);
+    }
+}

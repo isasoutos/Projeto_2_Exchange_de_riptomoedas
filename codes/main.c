@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+char extrato[100][100];
+int qtd_extrato = 0;
+
 int main(){
     cotacao *lista = malloc(sizeof(cotacao));
     usuario user = {"42246165806", "1234"};  // CPF e senha fixos
@@ -39,7 +42,13 @@ int main(){
             sacar(lista, &user);      
         }else if(opcao == 5){
             vender_criptomoedas(lista);
+        }else if(opcao == 9){
+            extrato(transacoes, total_transacoes);
+        }else if(opcao == 10){
+            exibir_extrato(extrato, qtd_extrato);
         }
+        
+        
     } while (opcao != 8);
 
     free(lista);

@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-extern Transacao transacoes[150];
-extern int total_transacoes;
 
 int login(usuario *user) {
     char cpf_input[TAM_CPF + 1];
@@ -39,7 +37,6 @@ int menu() {
     printf("6- Vender Criptomoedas\n");
     printf("7- Atualizar cotação\n");
     printf("8- Sair\n");
-    printf("10- Exibir Extrato\n");
 
 
     printf("Digite o que deseja: ");
@@ -61,6 +58,27 @@ int cripto() {
 
     return moedas;
 
+}
+
+void extrato(cotacao *lista){
+    char senha_digitada[TAM_SENHA + 1];
+
+    printf("Digite sua senha para acessar seu extrato: ");
+    scanf(" %4s", senha_digitada);
+
+
+    printf("Extrato bancário\n");
+    printf("Saldo da conta: R$ %.2f\n", lista->saldo_reais);
+
+    printf("Histório de Operações!\n");
+
+    if(lista->total_operacao == 0){
+        printf("Nenhuma operação registrada!\n");
+    } else{
+        for (int i = 0; i < lista->total_operacao; i++){
+            printf("%d. %s\n", i + i, lista->historico[i]);
+        }
+    }
 }
 
 void consultar_saldo(cotacao *lista){
@@ -105,12 +123,11 @@ void deposito(cotacao *lista, usuario *user){
         return;
     }
 
-    lista->saldo_reais += valor_depo;
-    registrar_transacao(transacoes, total_transacoes, "Depósito", valor_depo, 0.0);
-
-
     printf("Depósito de R$ %.2f realizado as %s.\n", valor_depo, data_hora);
     printf("Novo saldo: R$ %.2f as %s\n", lista->saldo_reais, data_hora);
+
+    sprintf(lista->historico[lista->total_operacao], "Depósito de R$ %.2f\n", valor_depo);
+    lista->total_operacao++;
 }
 
 void comprar_criptomoedas(cotacao *lista, usuario *user){
@@ -152,6 +169,8 @@ void comprar_criptomoedas(cotacao *lista, usuario *user){
             printf("Saldo atual: %.2f as %s\n", lista->saldo_reais, data_hora);
             printf("Saldo bitcoin: %.4f as %s\n", lista->saldo_bit, data_hora);
             printf("Taxa de compra 2%%\n");
+            sprintf(lista->historico[lista->total_operacao], "Saldo bitcoin de R$ %.5f\n", lista->saldo_bit);
+            lista->total_operacao++;
 
         }else if(lista->saldo_reais < compra_bit){
             printf("Saldo insulficiente\n");
@@ -180,6 +199,8 @@ void comprar_criptomoedas(cotacao *lista, usuario *user){
             printf("Saldo atual: %.2f as %s\n", lista->saldo_reais, data_hora);
             printf("Saldo ethereum: %.2f as %s\n", lista->saldo_eth, data_hora);
             printf("Taxa de compra 1%%\n");
+            sprintf(lista->historico[lista->total_operacao], "Saldo ethereum de R$ %.2f\n", lista->saldo_eth);
+            lista->total_operacao++;
 
         }else if(lista->saldo_reais < compra_eth){
             printf("Saldo insulficiente\n");
@@ -208,6 +229,8 @@ void comprar_criptomoedas(cotacao *lista, usuario *user){
             printf("Saldo atual: %.2f as %s\n", lista->saldo_reais, data_hora);
             printf("Saldo ripple: %.2f as %s\n", lista->saldo_rip, data_hora);
             printf("Taxa de compra 1%%\n");
+            sprintf(lista->historico[lista->total_operacao], "Saldo Ripple de R$ %.2f\n", lista->saldo_rip);
+            lista->total_operacao++;
 
         }else if(lista->saldo_reais < compra_rip){
             printf("Saldo insulficiente\n");
@@ -216,8 +239,6 @@ void comprar_criptomoedas(cotacao *lista, usuario *user){
         printf("Criptomoeda não identificada!\n");
     }
 }
-
-
 
 void atualizar_cotacao(cotacao *lista){
     int negativo = -5;
@@ -289,16 +310,17 @@ void sacar(cotacao *carteira, usuario *user) {
     }
 
     carteira->saldo_reais -= valor;
-    registrar_transacao(transacoes, total_transacoes, "Saque", valor, 0.0);
-
    
-    printf("✅ Saque de R$ %.2f realizado as %s com sucesso!\n", valor, data_hora);
+    printf("Saque de R$ %.2f realizado as %s com sucesso!\n", valor, data_hora);
     printf("Novo saldo: R$ %.2f as %s\n", carteira->saldo_reais, data_hora);
+    sprintf(carteira->historico[carteira->total_operacao], "Saque de R$ %.2f\n", valor);
+    carteira->total_operacao++;
 }
 void vender_criptomoedas (cotacao *lista) {
     // Taxas sugeridas na orientação: Bitcoin 3%, Ethereum 2%, Ripple 1%
     float valor_venda;
     int escolher = cripto();
+    char senha_digitada[TAM_SENHA + 1];
 
     char data_hora[30];
     atual_datahora(data_hora, sizeof(data_hora));
@@ -322,9 +344,14 @@ void vender_criptomoedas (cotacao *lista) {
         lista->saldo_bit -= valor_venda;
         lista->saldo_reais += liquido;
 
+        printf("Digite sua senha para confirmar sua compra: ");
+        scanf(" %4s", senha_digitada);
+
         printf("Venda realizada!\n");
         printf("Taxa de 3%%: R$ %.2f\n", taxa);
         printf("Recebido %s em reais: R$ %.2f\n",data_hora, liquido);
+        sprintf(lista->historico[lista->total_operacao], "Saldo recebido R$ %.2f\n", liquido);
+        lista->total_operacao++;
     }
 
     else if (escolher == 2) { // Ethereum
@@ -346,9 +373,14 @@ void vender_criptomoedas (cotacao *lista) {
         lista->saldo_eth -= valor_venda;
         lista->saldo_reais += liquido;
 
+        printf("Digite sua senha para confirmar sua compra: ");
+        scanf(" %4s", senha_digitada);
+
         printf("Venda realizada!\n");
         printf("Taxa de 2%%: R$ %.2f\n", taxa);
         printf("Recebido %s em reais: R$ %.2f\n", data_hora, liquido);
+        sprintf(lista->historico[lista->total_operacao], "Saldo recebido R$ %.2f\n", liquido);
+        lista->total_operacao++;
     }
 
     else if (escolher == 3) { // Ripple
@@ -370,43 +402,16 @@ void vender_criptomoedas (cotacao *lista) {
         lista->saldo_rip -= valor_venda;
         lista->saldo_reais += liquido;
 
+        printf("Digite sua senha para confirmar sua compra: ");
+        scanf(" %4s", senha_digitada);
+
         printf("Venda realizada!\n");
         printf("Taxa de 1%%: R$ %.2f\n", taxa);
         printf("Recebido %s em reais: R$ %.2f\n", data_hora, liquido);
+        sprintf(lista->historico[lista->total_operacao], "Saldo recebido R$ %.2f\n", liquido);
+        lista->total_operacao++;
     }
 
     else {
         printf("Moeda inválida.\n");
-    }
-    
-void registrar_transacao(Transacao transacoes[], int *total, const char *tipo, float valor, float taxa) {
-    if (*total >= TAM_EXTRATO) return; // limite de 150
-    time_t agora = time(NULL);
-    struct tm *tm_info = localtime(&agora);
-    
-    strftime(transacoes[*total].horario, sizeof(transacoes[*total].horario), "%d/%m %H:%M", tm_info);
-    strcpy(transacoes[*total].tipo, tipo);
-    transacoes[*total].valor = valor;
-    transacoes[*total].taxa = taxa;
-    
-        (*total)++;
-    }
-
-void extrato(Transacao transacoes[], int total) {
-    printf("\n========== EXTRATO ==========\n");
-    
-    if (total == 0) {
-        printf("Nenhuma transação registrada.\n");
-    }
-    
-    for (int i = 0; i < total; i++) {
-        printf("%s | %s | Valor: R$ %.2f | Taxa: %.2f%%\n",
-                transacoes[i].horario,
-                transacoes[i].tipo,
-                transacoes[i].valor,
-                transacoes[i].taxa);
-        }
-    
-    printf("==============================\n");
-    }
-    
+    }}

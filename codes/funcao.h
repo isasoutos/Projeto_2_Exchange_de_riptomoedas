@@ -1,19 +1,11 @@
 #define TAM_CPF 11
 #define TAM_SENHA 4
-#define TAM_EXTRATO 150
 
 typedef struct { // Struct do usuário
     char CPF[TAM_CPF + 1];    // +1 para o '\0'
     char senha[TAM_SENHA + 1];
 } usuario;
 
-
-typedef struct {
-    char tipo[30];        
-    float valor;
-    float taxa;
-    char horario[20];  
-} Transacao;
 
 typedef struct { // Struct para valores da carteira e cotações
     float bitcoin;
@@ -23,6 +15,8 @@ typedef struct { // Struct para valores da carteira e cotações
     float saldo_bit;
     float saldo_eth;
     float saldo_rip;
+    char historico [100][100];
+    int total_operacao;
 } cotacao;
 
 
@@ -46,10 +40,6 @@ void sacar(cotacao *, usuario *);
 
 void atual_datahora(char *destino, int tamanho);
 
-void registrar_extrato(char extrato[][100], int *qtd, const char *mensagem);
+void vender_criptomoedas(cotacao *);
 
-void exibir_extrato(char extrato[][100], int qtd);
-
-void registrar_transacao(Transacao transacoes[], int *total, const char *tipo, float valor, float taxa);
-
-void extrato(Transacao transacoes[], int total);
+void extrato(cotacao *);

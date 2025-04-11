@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-Transacao transacoes[150];
-int total_transacoes = 0;
 
 
 int main(){
@@ -44,7 +42,7 @@ int main(){
         }else if(opcao == 6){
             vender_criptomoedas(lista);
         }else if(opcao == 4){
-            extrato(transacoes, total_transacoes);        
+            extrato(lista);
         }
         
         

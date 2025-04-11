@@ -16,13 +16,12 @@ Curso: Ciência de Dados e Inteligência Artificial - CCP230
 ## ⚙️ Funcionalidade
 - Efetuar login com CPF: 42246165806 e senha:1234.
 - Consultar saldo da carteira (reais, bitcoin, ethereum, ripple) precisa informar a senha.  
-- Consultar extrato de operações (salvo em arquivo ".txt"). 
+- Consultar extrato de operações. 
 - Depositar reais na carteira (com validação da senha).
 - Sacar reais (com validação de senha).
 - Comprar criptomoedas (com taxas e confirmação). 
 - Vender criptomoedas (com taxas e confirmação).
 - Atualizar cotação das moedas (variação entre -5% e +5%). 
-- Persistência dos dados em arquivos binários.
 
 ## 💸 Taxas de transação
    - Bitcoin - Taxa de compra: 2% - Taxa de Venda: 3%
@@ -31,8 +30,6 @@ Curso: Ciência de Dados e Inteligência Artificial - CCP230
 
 ## 🛠 Tecnologias utilizadas
    - Linguagem C
-   - Arquivos binários
-   - Arquivos ".txt" para extratos
 
 ##  🚀 Compilar e rodar
    - Acessar a pasta: cd codes

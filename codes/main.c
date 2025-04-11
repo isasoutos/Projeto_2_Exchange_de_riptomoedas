@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <time.h>
 
+Transacao transacoes[150];
+int total_transacoes = 0;
+
+
+
 char extrato[100][100];
 int qtd_extrato = 0;
 
@@ -42,7 +47,7 @@ int main(){
             sacar(lista, &user);      
         }else if(opcao == 6){
             vender_criptomoedas(lista);
-        }else if(opcao == 4){
+        }else if(opcao == 10){
             registrar_extrato(transacoes, total_transacoes);
         }else if(opcao == 4){
             exibir_extrato(extrato, qtd_extrato);

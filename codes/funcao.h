@@ -44,9 +44,12 @@ void atualizar_cotacao(cotacao *);
 
 void sacar(cotacao *, usuario *);
 
-void atual_datahora();
+void atual_datahora(char *destino, int tamanho);
 
 void registrar_extrato(char extrato[][100], int *qtd, const char *mensagem);
 
 void exibir_extrato(char extrato[][100], int qtd);
 
+void registrar_transacao(Transacao transacoes[], int *total, const char *tipo, float valor, float taxa);
+
+void extrato(Transacao transacoes[], int total);

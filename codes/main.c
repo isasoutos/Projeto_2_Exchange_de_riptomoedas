@@ -34,17 +34,17 @@ int main(){
             consultar_saldo(lista);
         }else if(opcao == 2){
             deposito(lista, &user);
-        }else if(opcao == 4){
-            comprar_criptomoedas(lista, &user);
-        }else if(opcao == 6){
-            atualizar_cotacao(lista);
-        }else if(opcao == 7){
-            sacar(lista, &user);      
         }else if(opcao == 5){
+            comprar_criptomoedas(lista, &user);
+        }else if(opcao == 7){
+            atualizar_cotacao(lista);
+        }else if(opcao == 3){
+            sacar(lista, &user);      
+        }else if(opcao == 6){
             vender_criptomoedas(lista);
-        }else if(opcao == 9){
-            extrato(transacoes, total_transacoes);
-        }else if(opcao == 10){
+        }else if(opcao == 4){
+            registrar_extrato(transacoes, total_transacoes);
+        }else if(opcao == 4){
             exibir_extrato(extrato, qtd_extrato);
         }
         

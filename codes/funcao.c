@@ -30,13 +30,12 @@ int menu() {
     printf("----------------------------------------------------------\n");
     printf("1- Consultar saldo\n");
     printf("2- Depósito\n");
-    printf("4- Comprar Criptomoedas\n");
-    printf("5- Vender Criptomoedas\n");
-    printf("6- Atualizar cotação\n");
-    printf("7- Sacar\n");
+    printf("3- Saque\n");
+    printf("4- Extrato\n");
+    printf("5- Comprar Criptomoedas\n");
+    printf("6- Vender Criptomoedas\n");
+    printf("7- Atualizar cotação\n");
     printf("8- Sair\n");
-    printf("9- Extrato\n");
-    printf("10- Extrato\n");
 
     printf("Digite o que deseja: ");
     scanf("%d", &opcao);

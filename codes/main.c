@@ -36,7 +36,9 @@ int main(){
         }else if(opcao == 5){
             comprar_criptomoedas(lista, &user);
         }else if(opcao == 7){
-            atualizar_cotacao(lista);
+            atualizar_cotacao_bit(lista);
+            atualizar_cotacao_eth(lista);
+            atualizar_cotacao_rip(lista);
         }else if(opcao == 3){
             sacar(lista, &user);      
         }else if(opcao == 6){

@@ -17,7 +17,6 @@ int menu_inv() {
     printf("7- Atualizar cotação\n");
     printf("8- Sair\n");
 
-
     printf("Digite o que deseja: ");
     scanf("%d", &opcao);
     printf("----------------------------------------------------------\n");

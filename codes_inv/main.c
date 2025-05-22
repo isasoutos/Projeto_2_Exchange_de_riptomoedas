@@ -38,9 +38,10 @@ int main() {
         } else if (opcao == 4) {
             extrato(lista);
         } else if (opcao == 5) {
-            comprar_criptomoedas(lista, &user);
+            listar_criptomoedas();
+            comprar_criptomoeda(lista, &user);
         } else if (opcao == 6) {
-            vender_criptomoedas(lista);
+            //vender_criptomoedas(lista);
         } else if (opcao == 7) {
             atualizar_cotacao_bit(lista);
             atualizar_cotacao_eth(lista);

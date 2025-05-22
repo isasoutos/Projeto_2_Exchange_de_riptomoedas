@@ -17,7 +17,7 @@ typedef struct {
 // Struct para o cadastro de criptomoedas
 typedef struct {
     char nome[TAM_CRIPTO];
-    float cotacao_inicial;
+    float cotacao;
     float taxa_compra;
     float taxa_venda;
 } cripto;
@@ -41,8 +41,9 @@ void sacar(cotacao *, usuario *);
 void deposito(cotacao *, usuario *);
 
 //Funções para o código do investidor realizar a compra e venda de criptomoedas do arquivo comprar_vender_criptomoedas.c
-void vender_criptomoedas(cotacao *);
-void comprar_criptomoedas(cotacao *, usuario *);
+//void vender_criptomoedas(cotacao *);
+void comprar_criptomoeda(cotacao *, usuario*);
+void listar_criptomoedas();
 
 //Funções para o código do investidor realizar o login do arquivo login.c
 int login(usuario *user);

@@ -1,8 +1,9 @@
+// Funções para o código do investidor
 #define TAM_CPF 11
 #define TAM_SENHA 4
 
 typedef struct { // Struct do usuário
-    char CPF[TAM_CPF + 1];    // +1 para o '\0'
+    char login[TAM_CPF + 1];    // +1 para o '\0'
     char senha[TAM_SENHA + 1];
 } usuario;
 
@@ -26,7 +27,7 @@ void vender_criptomoedas(cotacao *);
 
 int login(usuario *user);
 
-int menu();
+int menu_inv();
 
 void deposito(cotacao *, usuario *);
 
@@ -47,3 +48,29 @@ void atual_datahora(char *destino, int tamanho);
 void vender_criptomoedas(cotacao *);
 
 void extrato(cotacao *);
+
+
+void menuInvestidor();
+
+// Funções para o código do administrador
+#define TAM_CPF 11
+#define TAM_SENHA 4
+#define QTDE_INV 100
+
+typedef struct {
+    usuario* vetor[QTDE_INV];
+    int qtde;
+} investidor;
+
+usuario *cadastro_investidor();
+int cadastrar_investidor (investidor *);
+int excluir_inv(investidor *);
+int senha_valida(const char *);
+int login_existe(const char *login);
+int excluir_investidor_arquivo(const char *login);
+
+void menuAdministrador();
+
+int menu_principal();
+int menu_adm();
+int cripto();

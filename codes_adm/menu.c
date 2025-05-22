@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#include "adm.h"
 #include <stdlib.h>
+#include "funcao.h"
 
-int menu() {
+int menu_adm() {
     int escolha;
 
     printf("----------------------------------------------------------\n");
+    printf("=== MENU DO ADMINISTRADOR ===\n");
     printf("1- Cadastrar Novo Investidor\n");
     printf("2- Excluir Investidor\n");
     printf("3- Cadastro de Criptomoeda\n");

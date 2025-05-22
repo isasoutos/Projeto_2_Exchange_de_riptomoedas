@@ -1,29 +1,58 @@
 #include <stdio.h>
 #include <string.h>
-#include "adm.h"
+#include "funcao.h"
 #include <stdlib.h>
 
-cadastro_inv *cadastro_investidor(){
+#define ARQ_INVESTIDOR "investidores.bin"
 
-    cadastro_inv *novo = malloc(sizeof(cadastro_inv));
-    printf("Digite o login do investidor(apenas números): ");
-    scanf("%s", novo->login);
-
-    printf("Digite a senha do investidor(até 4 dígitos): ");
-    scanf("%s", novo->senha);
-
-    printf("Investidor Cadastro com sucesso\n");
-    return novo;
+int login_existe(const char *login) {
+    FILE *fp = fopen(ARQ_INVESTIDOR, "rb");
+    if (!fp) return 0;
+    usuario temp;
+    while (fread(&temp, sizeof(usuario), 1, fp)) {
+        if (strcmp(temp.login, login) == 0) {
+            fclose(fp);
+            return 1;
+        }
+    }
+    fclose(fp);
+    return 0;
 }
 
-int cadastrar_investidor(investidor *cadastro, cadastro_inv *novo){
-    if (cadastro->qtde >= QTDE_INV) {
-        printf("Limite de investidores atingido.\n");
+int senha_valida(const char *senha) {
+    if (strlen(senha) > 4) return 0;
+    for (int i = 0; senha[i]; i++) {
+        if (senha[i] < '0' || senha[i] > '9') return 0;
+    }
+    return 1;
+}
+int cadastrar_investidor(investidor *cadastro) {
+    usuario novo;
+    printf("Digite o login do investidor (apenas números): ");
+    scanf("%s", novo.login);
+
+    if (login_existe(novo.login)) {
+        printf("Login já cadastrado!\n");
         return 0;
     }
 
-    cadastro->vetor[cadastro->qtde] = novo;
-    cadastro->qtde++;
+    printf("Digite a senha do investidor (até 4 dígitos numéricos): ");
+    scanf("%s", novo.senha);
+
+    if (!senha_valida(novo.senha)) {
+        printf("Senha inválida! Use até 4 dígitos numéricos.\n");
+        return 0;
+    }
+
+    FILE *fp = fopen(ARQ_INVESTIDOR, "ab");
+    if (!fp) {
+        printf("Erro ao abrir arquivo de investidores.\n");
+        return 0;
+    }
+    fwrite(&novo, sizeof(usuario), 1, fp);
+        fclose(fp);
+
+    printf("Investidor cadastrado com sucesso!\n");
     return 1;
 }
 
@@ -60,4 +89,40 @@ int excluir_inv(investidor *cadastro){
     }
     printf("CPF não encontrado.\n");
     return 0;
+}
+
+int excluir_investidor_arquivo(const char *login) {
+    FILE *fp = fopen(ARQ_INVESTIDOR, "rb");
+    if (!fp) {
+        printf("Arquivo de investidores não encontrado.\n");
+        return 0;
+    }
+    FILE *fp_temp = fopen("temp.bin", "wb");
+    if (!fp_temp) {
+        fclose(fp);
+        printf("Erro ao criar arquivo temporário.\n");
+        return 0;
+    }
+
+    usuario temp;
+    int encontrado = 0;
+    while (fread(&temp, sizeof(usuario), 1, fp)) {
+        if (strcmp(temp.login, login) == 0) {
+            encontrado = 1;
+        } else {
+            fwrite(&temp, sizeof(usuario), 1, fp_temp);
+        }
+    }
+    fclose(fp);
+    fclose(fp_temp);
+
+    remove(ARQ_INVESTIDOR);
+    rename("temp.bin", ARQ_INVESTIDOR);
+
+    if (encontrado)
+        printf("Investidor excluído com sucesso do arquivo!\n");
+    else
+        printf("Investidor não encontrado no arquivo.\n");
+
+    return encontrado;
 }

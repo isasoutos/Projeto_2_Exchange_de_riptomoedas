@@ -3,9 +3,8 @@
 #include "funcao.h"
 
 int main() {
-    printf("\n--- Área do Administrador ---\n");
-
     investidor *cadastro = malloc(sizeof(investidor));
+    printf("Área do Administrador\n");
     int escolha;
 
     do {
@@ -16,9 +15,9 @@ int main() {
         } else if (escolha == 2) {
             excluir_inv(cadastro);
         } else if (escolha == 3) {
-
+            cadastrar_cripto();
         } else if (escolha == 4) {
-            
+            excluir_cripto();
         }
 
     } while (escolha != 8);

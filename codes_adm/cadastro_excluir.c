@@ -3,10 +3,10 @@
 #include "funcao.h"
 #include <stdlib.h>
 
-#define ARQ_INVESTIDOR "investidores.bin"
+#define INV "investidores.bin"
 
 int login_existe(const char *login) {
-    FILE *fp = fopen(ARQ_INVESTIDOR, "rb");
+    FILE *fp = fopen(INV, "rb");
     if (!fp) return 0;
     usuario temp;
     while (fread(&temp, sizeof(usuario), 1, fp)) {
@@ -27,29 +27,32 @@ int senha_valida(const char *senha) {
     return 1;
 }
 int cadastrar_investidor(investidor *cadastro) {
-    usuario novo;
-    printf("Digite o login do investidor (apenas números): ");
-    scanf("%s", novo.login);
+    usuario user;
+    printf("Digite o login do novo investidor (apenas números): ");
+    scanf("%s", user.login);
 
-    if (login_existe(novo.login)) {
+    if (login_existe(user.login)) {
         printf("Login já cadastrado!\n");
         return 0;
+    }else if (strlen(user.login) != TAM_CPF) {
+        printf("Login inválido! Use apenas números e 11 dígitos.\n");
+        return 0;
+    }else{
+        printf("Digite a senha do investidor (até 4 dígitos numéricos): ");
+        scanf("%s", user.senha);
     }
 
-    printf("Digite a senha do investidor (até 4 dígitos numéricos): ");
-    scanf("%s", novo.senha);
-
-    if (!senha_valida(novo.senha)) {
+    if (!senha_valida(user.senha)) {
         printf("Senha inválida! Use até 4 dígitos numéricos.\n");
         return 0;
     }
 
-    FILE *fp = fopen(ARQ_INVESTIDOR, "ab");
+    FILE *fp = fopen(INV, "ab");
     if (!fp) {
         printf("Erro ao abrir arquivo de investidores.\n");
         return 0;
     }
-    fwrite(&novo, sizeof(usuario), 1, fp);
+    fwrite(&user, sizeof(usuario), 1, fp);
         fclose(fp);
 
     printf("Investidor cadastrado com sucesso!\n");
@@ -68,7 +71,7 @@ int excluir_inv(investidor *cadastro){
 
         if(strcmp(cadastro->vetor[i]->login, login) == 0){
             printf("Investidor encontrado!\n");
-            printf("CPF: %s\n", cadastro->vetor[i]->login);
+            printf("Login: %s\n", cadastro->vetor[i]->login);
             printf("Deseja realmente excluir? (s/n): ");
             scanf(" %c", &confirmacao);
 
@@ -92,7 +95,7 @@ int excluir_inv(investidor *cadastro){
 }
 
 int excluir_investidor_arquivo(const char *login) {
-    FILE *fp = fopen(ARQ_INVESTIDOR, "rb");
+    FILE *fp = fopen(INV, "rb");
     if (!fp) {
         printf("Arquivo de investidores não encontrado.\n");
         return 0;
@@ -116,8 +119,8 @@ int excluir_investidor_arquivo(const char *login) {
     fclose(fp);
     fclose(fp_temp);
 
-    remove(ARQ_INVESTIDOR);
-    rename("temp.bin", ARQ_INVESTIDOR);
+    remove(INV);
+    rename("temp.bin", INV);
 
     if (encontrado)
         printf("Investidor excluído com sucesso do arquivo!\n");

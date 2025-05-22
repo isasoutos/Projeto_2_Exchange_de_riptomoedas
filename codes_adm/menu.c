@@ -7,7 +7,6 @@ int menu_adm() {
     int escolha;
 
     printf("----------------------------------------------------------\n");
-    printf("=== MENU DO ADMINISTRADOR ===\n");
     printf("1- Cadastrar Novo Investidor\n");
     printf("2- Excluir Investidor\n");
     printf("3- Cadastro de Criptomoeda\n");
@@ -16,7 +15,6 @@ int menu_adm() {
     printf("6- Extrato do Investidor\n");
     printf("7- Atualizar cotação\n");
     printf("8- Sair\n");
-
 
     printf("Digite o que deseja: ");
     scanf("%d", &escolha);

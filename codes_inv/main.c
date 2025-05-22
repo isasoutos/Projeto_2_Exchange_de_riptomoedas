@@ -6,9 +6,8 @@
 #include "funcao.h"
 
 int main() {
-    printf("\n--- Área do Investidor ---\n");
-
     cotacao *lista = malloc(sizeof(cotacao));
+    printf("\nÁrea do Investidor\n");
     usuario user;
     int opcao;
 

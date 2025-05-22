@@ -1,6 +1,7 @@
 #define TAM_CPF 11
 #define TAM_SENHA 4
 #define QTDE_INV 100
+#define TAM_CRIPTO 50
 
 // Struct do usuário
 typedef struct { 
@@ -12,6 +13,14 @@ typedef struct {
     usuario* vetor[QTDE_INV];
     int qtde;
 } investidor;
+
+// Struct para o cadastro de criptomoedas
+typedef struct {
+    char nome[TAM_CRIPTO];
+    float cotacao_inicial;
+    float taxa_compra;
+    float taxa_venda;
+} cripto;
 
 // Struct para valores da carteira e cotações
 typedef struct { 

@@ -7,7 +7,6 @@ int menu_inv() {
     int opcao;
 
     printf("----------------------------------------------------------\n");
-    printf("=== MENU DO INVESTIDOR ===\n");
     printf("1- Consultar saldo\n");
     printf("2- Depósito\n");
     printf("3- Saque\n");

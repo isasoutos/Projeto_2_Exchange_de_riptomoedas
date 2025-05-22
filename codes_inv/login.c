@@ -8,9 +8,9 @@ int login(usuario *user) {
     char senha_input[TAM_SENHA + 1];
     usuario temp;
 
-    printf("Login (CPF): ");
+    printf("Digite o seu login: ");
     scanf("%s", login_input);
-    printf("Senha: ");
+    printf("Digite a sua senha de 4 digitos: ");
     scanf("%s", senha_input);
 
     FILE *fp = fopen("../codes_adm/investidores.bin", "rb");

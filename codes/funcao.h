@@ -1,14 +1,29 @@
 // Funções para o código do investidor
 #define TAM_CPF 11
 #define TAM_SENHA 4
+#define QTDE_INV 100
+#define TAM_CRIPTO 30
 
-typedef struct { // Struct do usuário
-    char login[TAM_CPF + 1];    // +1 para o '\0'
+// Struct do usuário
+typedef struct { 
+    char login[TAM_CPF + 1];
     char senha[TAM_SENHA + 1];
 } usuario;
 
+typedef struct {
+    usuario* vetor[QTDE_INV];
+    int qtde;
+} investidor;
 
-typedef struct { // Struct para valores da carteira e cotações
+//typedef struct {
+//    char nome[TAM_CRIPTO];
+//    float cotacao_inicial;
+//    float taxa_compra;
+//    float taxa_venda;
+//} criptomoeda;
+
+// Struct para valores da carteira e cotações
+typedef struct { 
     float bitcoin;
     float ethereum;
     float ripple;
@@ -20,48 +35,30 @@ typedef struct { // Struct para valores da carteira e cotações
     int total_operacao;
 } cotacao;
 
-
+//Funções para o código do investidor para realizar depósito, saque e a visualização do saldo do arquivo deposito_saque.c
 void consultar_saldo(cotacao *);
-
-void vender_criptomoedas(cotacao *);
-
-int login(usuario *user);
-
-int menu_inv();
-
+void sacar(cotacao *, usuario *);
 void deposito(cotacao *, usuario *);
 
-int cripto();
-
+//Funções para o código do investidor realizar a compra e venda de criptomoedas do arquivo comprar_vender_criptomoedas.c
+void vender_criptomoedas(cotacao *);
 void comprar_criptomoedas(cotacao *, usuario *);
 
-void atualizar_cotacao_bit(cotacao *);
+//Funções para o código do investidor realizar o login do arquivo login.c
+int login(usuario *user);
 
-void atualizar_cotacao_eth(cotacao *);
-
-void atualizar_cotacao_rip(cotacao *);
-
-void sacar(cotacao *, usuario *);
-
+//Funções para o código do investidor realizar a atualização da data e hora do arquivo atualizar_datahora.c
 void atual_datahora(char *destino, int tamanho);
 
-void vender_criptomoedas(cotacao *);
-
+//Funções para o código do investidor realizar a visualização do extrato do arquivo extrato.c
 void extrato(cotacao *);
 
+//Funções para o código do investidor de atualizar as cotações do arquivo atualizar_cotacao.c
+void atualizar_cotacao_bit(cotacao *);
+void atualizar_cotacao_eth(cotacao *);
+void atualizar_cotacao_rip(cotacao *);
 
-void menuInvestidor();
-
-// Funções para o código do administrador
-#define TAM_CPF 11
-#define TAM_SENHA 4
-#define QTDE_INV 100
-
-typedef struct {
-    usuario* vetor[QTDE_INV];
-    int qtde;
-} investidor;
-
+// Funções para o código do administrador para cadastrar e excluir os investidores do arquivo cadastro_excluir_inv.c
 usuario *cadastro_investidor();
 int cadastrar_investidor (investidor *);
 int excluir_inv(investidor *);
@@ -69,8 +66,7 @@ int senha_valida(const char *);
 int login_existe(const char *login);
 int excluir_investidor_arquivo(const char *login);
 
-void menuAdministrador();
-
-int menu_principal();
+// Funções de menu do código do arquivo menu.c
 int menu_adm();
-int cripto();
+int menu_cripto();
+int menu_inv();

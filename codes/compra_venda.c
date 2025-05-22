@@ -17,7 +17,7 @@ void comprar_criptomoedas(cotacao *lista, usuario *user){
     printf("Valor do saldo do Ethereum: R$ %.2f\n", lista->saldo_eth);
     printf("Valor do saldo do Ripple: R$ %.2f\n", lista->saldo_rip);
 
-    int escolher = cripto();
+    int escolher = menu_cripto();
 
     if (escolher == 1){
         printf("Valor do bitcoin: %.2f\n", lista->bitcoin);
@@ -118,7 +118,7 @@ void comprar_criptomoedas(cotacao *lista, usuario *user){
 void vender_criptomoedas (cotacao *lista) {
     // Taxas sugeridas na orientação: Bitcoin 3%, Ethereum 2%, Ripple 1%
     float valor_venda;
-    int escolher = cripto();
+    int escolher = menu_cripto();
     char senha_digitada[TAM_SENHA + 1];
 
     char data_hora[30];

@@ -3,22 +3,6 @@
 #include <stdlib.h>
 #include "funcao.h"
 
-int menu_principal() {
-    int escolha;
-
-    printf("----------------------------------------------------------\n");
-    printf("Bem-vindo ao sistema de gerenciamento de criptomoedas!\n");
-    printf("=== MENU PRINCIPAL ===\n");
-    printf("1. Entrar como Administrador\n");
-    printf("2. Entrar como Investidor\n");
-    printf("3. Sair\n");
-    printf("Escolha uma opção: ");
-    scanf("%d", &escolha);
-    printf("----------------------------------------------------------\n");
-    
-    return escolha;
-}
-
 int menu_inv() {
     int opcao;
 
@@ -40,7 +24,7 @@ int menu_inv() {
     return opcao;
 }
 
-int cripto() {
+int menu_cripto() {
     int moedas;
 
     printf("---------------------\n");
@@ -52,7 +36,6 @@ int cripto() {
     scanf("%d", &moedas);
 
     return moedas;
-
 }
 
 int menu_adm() {

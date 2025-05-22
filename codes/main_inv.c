@@ -1,63 +1,11 @@
+// main_investidor.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "funcao.h" 
 #include <time.h>
+#include "funcao.h"
 
 int main() {
-    int escolha;
-
-    do {
-        escolha = menu_principal();
-        if (escolha == 1) {
-            menuAdministrador();
-        } else if (escolha == 2) {
-            menuInvestidor();
-        } else if (escolha == 3) {
-            printf("Saindo do programa...\n");
-        } else {
-            printf("Opção inválida. Tente novamente.\n");
-        }
-
-    } while (escolha != 3);
-
-    return 0;
-}
-
-// Função do Administrador
-void menuAdministrador() {
-    printf("\n--- Área do Administrador ---\n");
-
-    investidor *cadastro = malloc(sizeof(investidor));
-    int escolha;
-
-    do {
-        escolha = menu_adm();
-
-        if (escolha == 1) {
-            usuario *cadastro_investidor();
-            cadastrar_investidor(cadastro);
-        } else if (escolha == 2) {
-            excluir_inv(cadastro);
-        } else if (escolha == 3) {
-            
-        } else if (escolha == 4) {
-            
-        } else if (escolha == 5) {
-            
-        } else if (escolha == 6) {
-            
-        } else if (escolha == 7) {
-            
-        }
-
-    } while (escolha != 8);
-
-    free(cadastro);
-}
-
-// Função do Investidor
-void menuInvestidor() {
     printf("\n--- Área do Investidor ---\n");
 
     cotacao *lista = malloc(sizeof(cotacao));
@@ -103,4 +51,5 @@ void menuInvestidor() {
     } while (opcao != 8);
 
     free(lista);
+    return 0;
 }

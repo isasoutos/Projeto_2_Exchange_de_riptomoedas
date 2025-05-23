@@ -3,7 +3,8 @@
 #include "funcao.h"
 
 int main() {
-    investidor *cadastro = malloc(sizeof(investidor));
+    usuario *cadastro = malloc(sizeof(usuario));
+    investidor *exclui = malloc(sizeof(investidor));
     printf("Área do Administrador\n");
     int escolha;
 
@@ -17,7 +18,7 @@ int main() {
         } else if (escolha == 3) {
             cadastrar_cripto();
         } else if (escolha == 4) {
-            excluir_cripto();
+            excluir_cripto(exclui);
         } else if (escolha == 9) {
             listar_investidores();
         }

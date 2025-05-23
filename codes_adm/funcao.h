@@ -6,7 +6,9 @@
 // structs
 typedef struct { 
     char login[TAM_CPF + 1];
-    char senha[TAM_SENHA + 1];
+    char nome[50];
+    char senha[TAM_SENHA];
+    float saldo;
 } usuario;
 
 typedef struct {
@@ -22,28 +24,17 @@ typedef struct {
     float taxa_venda;
 } cripto;
 
-typedef struct {
-    char cpf[TAM_CPF + 1];
-    char nome[50];
-    float saldo;
-} investidor_individual;
-
-
 void listar_investidores();
 
 // menu.c
 int menu_adm();
 
-
 // investidor_cadastrar.c
-usuario *cadastro_investidor();
 void cadastrar_investidor();
 
-
 // investidor_excluir.c
-int excluir_inv(investidor *);
+void excluir_inv();
 int excluir_investidor_arquivo(const char *login);
-
 
 // investidor_login.c
 int senha_valida(const char *);

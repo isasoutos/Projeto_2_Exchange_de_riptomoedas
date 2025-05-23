@@ -3,10 +3,11 @@
 #define QTDE_INV 100
 #define TAM_CRIPTO 50
 
-// Struct do usuário
 typedef struct { 
     char login[TAM_CPF + 1];
-    char senha[TAM_SENHA + 1];
+    char nome[50];
+    char senha[TAM_SENHA];
+    float saldo;
 } usuario;
 
 typedef struct {

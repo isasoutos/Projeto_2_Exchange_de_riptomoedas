@@ -10,7 +10,7 @@ void cadastrar_investidor() {
     printf("Digite o nome do investidor: ");
     scanf(" %[^\n]", novo.nome);
 
-    printf("Digite o login do investidor (11 dígitos): ");
+    printf("Digite o login do investidor(11 digitos): ");
     scanf("%s", novo.login);
 
     printf("Digite a senha do investidor: ");

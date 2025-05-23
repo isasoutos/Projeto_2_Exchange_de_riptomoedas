@@ -20,7 +20,6 @@ int login(usuario *user) {
     }
     while (fread(&temp, sizeof(usuario), 1, fp)) {
         if (strcmp(temp.login, login_input) == 0 && strcmp(temp.senha, senha_input) == 0) {
-            // Preenche a struct user com os dados do arquivo
             strcpy(user->login, temp.login);
             strcpy(user->senha, temp.senha);
             fclose(fp);

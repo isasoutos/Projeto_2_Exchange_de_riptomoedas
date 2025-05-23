@@ -51,8 +51,8 @@ Curso: Ciência de Dados e Inteligência Artificial - CCP230
 ##  Compilar e rodar
 #### Parte do Investidor
    - Acessar a pasta: cd codes_inv
-   - Compilar o programa: gcc *.c -o main
-   - Execute o sistema: ./main
+   - Compilar o programa: gcc *.c 
+   - Execute o sistema: ./a.out
 #### Parte do Administrador
    - Acessar a pasta: cd codes_adm
    - Compilar o programa: gcc *.c 

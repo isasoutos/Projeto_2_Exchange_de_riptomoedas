@@ -2,6 +2,8 @@
 #include <string.h>
 #include "funcao.h"
 #include <stdlib.h>
+#define INV "investidores.bin"
+
 
 void consultar_saldo(cotacao *lista){
 
@@ -14,6 +16,7 @@ void consultar_saldo(cotacao *lista){
 void deposito(cotacao *lista, usuario *user){
     float valor_depo;
     char senha_digitada[TAM_SENHA + 1];
+    int encontrado = 0;
 
     char data_hora[30];
     atual_datahora(data_hora, sizeof(data_hora));
@@ -33,9 +36,27 @@ void deposito(cotacao *lista, usuario *user){
         printf("Senha incorreta! Deposito cancelado, tente novamente.\n");
         return;
     } else{
+
+        FILE *fp = fopen("../codes_adm/investidores.bin", "rb+");
+        if (!fp) {
+            printf("Erro ao abrir o arquivo de investidores.\n");
+            return;
+        }
+
         lista->saldo_reais += valor_depo;
-        printf("Depósito de R$ %.2f realizado as %s.\n", valor_depo, data_hora);
-        printf("Novo saldo: R$ %.2f as %s\n", lista->saldo_reais, data_hora);
+
+        usuario temp;
+        while (fread(&temp, sizeof(usuario), 1, fp)) {
+        if (strcmp(temp.login, user->login) == 0) {
+        temp.saldo += valor_depo;
+        fseek(fp, -sizeof(usuario), SEEK_CUR);
+        fwrite(&temp, sizeof(usuario), 1, fp);
+        printf("Depósito realizado! Novo saldo: R$ %.2f\n", temp.saldo);
+        encontrado = 1;
+        break;
+    }
+    }
+    fclose(fp);
     }
 
     sprintf(lista->historico[lista->total_operacao], "Depósito de R$ %.2f\n", valor_depo);

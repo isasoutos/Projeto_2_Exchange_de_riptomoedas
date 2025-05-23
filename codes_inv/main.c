@@ -30,7 +30,7 @@ int main() {
         opcao = menu_inv();
 
         if (opcao == 1) {
-            consultar_saldo(lista);
+            consultar_saldo(&user, lista);
         } else if (opcao == 2) {
             deposito(lista, &user);
         } else if (opcao == 3) {
@@ -38,10 +38,12 @@ int main() {
         } else if (opcao == 4) {
             extrato(lista);
         } else if (opcao == 5) {
-            listar_criptomoedas();
+            listar_criptomoedas_compra();
             comprar_criptomoeda(lista, &user);
         } else if (opcao == 6) {
-            //vender_criptomoedas(lista);
+            listar_criptomoedas_venda();
+            venda_criptomoeda(lista, &user);
+
         } else if (opcao == 7) {
             atualizar_cotacao_bit(lista);
             atualizar_cotacao_eth(lista);

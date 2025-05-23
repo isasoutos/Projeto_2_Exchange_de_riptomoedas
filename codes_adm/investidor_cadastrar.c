@@ -25,7 +25,7 @@ void cadastrar_investidor() {
     }
     novo.saldo = 0.0;
 
-    FILE *fp = fopen(INV, "ab");
+    FILE *fp = fopen(INV, "rb+");
     if (!fp) {
         printf("Erro ao abrir o arquivo de investidores.\n");
         return;

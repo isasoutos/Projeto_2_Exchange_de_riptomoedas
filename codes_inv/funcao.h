@@ -2,6 +2,7 @@
 #define TAM_SENHA 4
 #define QTDE_INV 100
 #define TAM_CRIPTO 50
+#define MAX_CRIPTOS 20
 
 typedef struct { 
     char login[TAM_CPF + 1];
@@ -15,7 +16,11 @@ typedef struct {
     int qtde;
 } investidor;
 
-// Struct para o cadastro de criptomoedas
+typedef struct {
+    char nome[TAM_CRIPTO];
+    float saldo;
+} saldo_cripto;
+
 typedef struct {
     char nome[TAM_CRIPTO];
     float cotacao;
@@ -34,17 +39,23 @@ typedef struct {
     float saldo_rip;
     char historico [100][100];
     int total_operacao;
+    saldo_cripto criptos[MAX_CRIPTOS];
+    int qtd_criptos;
 } cotacao;
 
 //Funções para o código do investidor para realizar depósito, saque e a visualização do saldo do arquivo deposito_saque.c
-void consultar_saldo(cotacao *);
+void consultar_saldo(usuario *, cotacao *);
 void sacar(cotacao *, usuario *);
 void deposito(cotacao *, usuario *);
+int remover_saldo_cripto(cotacao *, const char *nome, float quantidade);
+void adicionar_saldo_cripto(cotacao *, const char *nome, float quantidade);
 
 //Funções para o código do investidor realizar a compra e venda de criptomoedas do arquivo comprar_vender_criptomoedas.c
 //void vender_criptomoedas(cotacao *);
 void comprar_criptomoeda(cotacao *, usuario*);
-void listar_criptomoedas();
+void listar_criptomoedas_compra();
+void listar_criptomoedas_venda();
+void venda_criptomoeda(cotacao *, usuario *);
 
 //Funções para o código do investidor realizar o login do arquivo login.c
 int login(usuario *user);

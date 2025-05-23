@@ -7,8 +7,18 @@
 
 void excluir_inv() {
     char login[TAM_CPF];
+    char confirmacao;
+
     printf("Digite o login do investidor que deseja excluir: ");
     scanf("%s", login);
+
+    printf("Tem certeza que deseja excluir esse investidor '%s'? (s/n): ", login);
+    scanf(" %c", &confirmacao);
+
+    if (confirmacao != 's' && confirmacao != 'S') {
+        printf("Operação de exclusão cancelada.\n");
+        return;
+    }
 
     FILE *fp = fopen(INV, "rb");
     if (!fp) {

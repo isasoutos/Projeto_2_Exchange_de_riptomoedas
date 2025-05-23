@@ -3,23 +3,9 @@
 #include <string.h>
 #include "funcao.h"
 
-void listar_investidores() {
-    FILE *fp = fopen("investidores.bin", "rb");
-    if (!fp) {
-        printf("Nenhum investidor cadastrado.\n");
-        return;
-    }
-    usuario temp;
-    int count = 0;
-    while (fread(&temp, sizeof(usuario), 1, fp)) {
-        printf("%d. Nome: %s | CPF: %s | Saldo: %.2f\n", ++count, temp.nome, temp.login, temp.saldo);
-    }
-    fclose(fp);
-}
-
 void consultar_saldo() {
     char login[TAM_CPF + 1] = {0}; 
-    printf("Digite o CPF do investidor que deseja consultar: ");
+    printf("Digite o login do investidor que deseja consultar: ");
     scanf("%s", login);
 
     FILE *fp = fopen("investidores.bin", "rb");

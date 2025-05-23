@@ -5,7 +5,6 @@
 
 int main() {
     usuario *cadastro = malloc(sizeof(usuario));
-    investidor *exclui = malloc(sizeof(investidor));
     printf("Área do Administrador\n");
     int escolha;
 
@@ -31,12 +30,10 @@ int main() {
             } else if (escolha == 3) {
                 cadastrar_cripto();
             } else if (escolha == 4) {
-                excluir_cripto(exclui);
+                excluir_cripto();
             } else if (escolha == 5) {
                 consultar_saldo();
-            } else if (escolha == 6) {
-                listar_investidores();
-            }
+            } 
 
         } while (escolha != 8);  // <-- agora 0 encerra o programa
     } else {
@@ -44,6 +41,5 @@ int main() {
     }
 
     free(cadastro);
-    free(exclui);
     return 0;
 }

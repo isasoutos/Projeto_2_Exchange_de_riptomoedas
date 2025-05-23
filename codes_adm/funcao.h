@@ -24,8 +24,6 @@ typedef struct {
     float taxa_venda;
 } cripto;
 
-void listar_investidores();
-
 // menu.c
 int menu_adm();
 

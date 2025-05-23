@@ -7,14 +7,25 @@
 
 void excluir_cripto() {
     char nome[TAM_CRIPTO];
+    char confirmacao;
+
     printf("Digite o nome da criptomoeda que deseja excluir: ");
     scanf("%s", nome);
+    
+    printf("Tem certeza que deseja excluir a criptomoeda '%s'? (s/n): ", nome);
+    scanf(" %c", &confirmacao);
+
+    if (confirmacao != 's' && confirmacao != 'S') {
+        printf("Operação de exclusão cancelada.\n");
+        return;
+    }
 
     FILE *fp = fopen(CRIPTOMOEDA, "rb");
     if (!fp) {
         printf("Arquivo de criptomoedas não encontrado.\n");
         return;
     }
+
     FILE *fp_temp = fopen("temp_cripto.bin", "wb");
     if (!fp_temp) {
         fclose(fp);
@@ -26,11 +37,12 @@ void excluir_cripto() {
     int encontrado = 0;
     while (fread(&temp, sizeof(cripto), 1, fp)) {
         if (strcmp(temp.nome, nome) == 0) {
-            encontrado = 1; 
+            encontrado = 1; // não escreve no novo arquivo
         } else {
             fwrite(&temp, sizeof(cripto), 1, fp_temp);
         }
     }
+
     fclose(fp);
     fclose(fp_temp);
 

@@ -1,39 +1,27 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "funcao.h"
-#include <stdlib.h>
 
-#define INV "investidores.bin"
+void cadastrar_investidor() {
+    investidor_individual novo;
 
-int cadastrar_investidor(investidor *cadastro) {
-    usuario user;
-    printf("Digite o login do novo investidor (apenas números): ");
-    scanf("%s", user.login);
+    printf("Digite o nome do investidor: ");
+    scanf(" %[^\n]", novo.nome);
 
-    if (login_existe(user.login)) {
-        printf("Login já cadastrado!\n");
-        return 0;
-    }else if (strlen(user.login) != TAM_CPF) {
-        printf("Login inválido! Use apenas números e 11 dígitos.\n");
-        return 0;
-    }else{
-        printf("Digite a senha do investidor (até 4 dígitos numéricos): ");
-        scanf("%s", user.senha);
-    }
+    printf("Digite o CPF do investidor (11 dígitos): ");
+    scanf("%s", novo.cpf);
 
-    if (!senha_valida(user.senha)) {
-        printf("Senha inválida! Use até 4 dígitos numéricos.\n");
-        return 0;
-    }
+    novo.saldo = 0.0;
 
-    FILE *fp = fopen(INV, "ab");
+    FILE *fp = fopen("investidores.bin", "ab");
     if (!fp) {
-        printf("Erro ao abrir arquivo de investidores.\n");
-        return 0;
+        printf("Erro ao abrir o arquivo de investidores.\n");
+        return;
     }
-    fwrite(&user, sizeof(usuario), 1, fp);
-        fclose(fp);
 
-    printf("Investidor cadastrado com sucesso!\n");
-    return 1;
+    fwrite(&novo, sizeof(investidor_individual), 1, fp);
+    fclose(fp);
+
+    printf("✅ Investidor cadastrado com sucesso!\n");
 }

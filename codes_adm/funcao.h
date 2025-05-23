@@ -22,7 +22,14 @@ typedef struct {
     float taxa_venda;
 } cripto;
 
+typedef struct {
+    char cpf[TAM_CPF + 1];
+    char nome[50];
+    float saldo;
+} investidor_individual;
 
+
+void listar_investidores();
 
 // menu.c
 int menu_adm();
@@ -30,7 +37,7 @@ int menu_adm();
 
 // investidor_cadastrar.c
 usuario *cadastro_investidor();
-int cadastrar_investidor (investidor *);
+void cadastrar_investidor();
 
 
 // investidor_excluir.c

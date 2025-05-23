@@ -18,7 +18,14 @@ int main() {
             cadastrar_cripto();
         } else if (escolha == 4) {
             excluir_cripto();
+        } else if (escolha == 9) {
+            listar_investidores();
         }
+        else if (escolha == 5) {
+            consultar_saldo();
+}
+
+        
 
     } while (escolha != 8);
 
